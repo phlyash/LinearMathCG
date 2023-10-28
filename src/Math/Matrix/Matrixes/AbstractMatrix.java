@@ -44,12 +44,25 @@ public abstract class AbstractMatrix {
         vectors[number] = vector;
     }
 
-    public int getDimension() {
+    public int getLength() {
         return vectors.length;
+    }
+    
+    public int getVectorLength(int vector) {
+        return vectors[vector].getLength();
     }
 
     public AbstractMatrix getMinor(int x, int y) {
-        return new Matrix3D();
+        return MatrixUtils.getMinor(this, x, y);
+    }
+
+    public float getDeterminant() {
+        float determinant = 0;
+        for(int i = 0; i < this.getLength(); i++) {
+            determinant += this.getVector(i).get(0) * this.getMinor(0, i).getDeterminant() * (i % 2 == 0 ? 1 : -1);
+        }
+
+        return determinant;
     }
 
     @Override

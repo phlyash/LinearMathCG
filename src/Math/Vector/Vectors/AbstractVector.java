@@ -1,6 +1,5 @@
 package Math.Vector.Vectors;
 
-import Math.Exceptions.VectorExceptions.WrongDimensionVectorException;
 import Math.Vector.VectorUtils;
 
 import java.util.Arrays;
@@ -8,16 +7,16 @@ import java.util.Arrays;
 public abstract class AbstractVector {
     protected float[] vector;
 
-    public void multiply(float num) {
-        VectorUtils.multiply(this, num);
+    public void multiply(float number) {
+        VectorUtils.multiply(this, number);
     }
 
-    public void divide(float num) {
-        VectorUtils.divide(this, num);
+    public void divide(float number) {
+        VectorUtils.divide(this, number);
     }
 
     public void normalize() {
-        divide(getLength());
+        divide(calculateLength());
     }
 
     public void set(float number, int axis) {
@@ -28,7 +27,7 @@ public abstract class AbstractVector {
         return vector[axis];
     }
 
-    public int getDimension() {
+    public int getLength() {
         return vector.length;
     }
 
@@ -44,7 +43,7 @@ public abstract class AbstractVector {
         return VectorUtils.getScalar(this, vectorToMultiplyBy);
     }
 
-    public float getLength() {
+    public float calculateLength() {
         return VectorUtils.getLength(this);
     }
 
