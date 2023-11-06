@@ -53,7 +53,7 @@ Each matrix implements following methods:
 * `getDeterminant()` returns determinant of current instance.
 * `reverseMatrix()` converts current matrix to it reversed matrix
 * `getElement(int y, int x)` shortcut to `getVector(x).get(y)`
-* `setElement(int number, int y, int x)` shortcut to `getVector(x).set(number, y)`
+* `setElement(float number, int y, int x)` shortcut to `getVector(x).set(number, y)`
 
 It's important to say that on current moment `Matrix2D` doesn't support operations
 with minors and all function that uses `getMinor(int x, int y)` function full list of that functions:
