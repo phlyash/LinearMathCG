@@ -36,12 +36,24 @@ public abstract class AbstractMatrix {
         MatrixUtils.matrixMultiplication(this, matrix);
     }
 
+    public void reverseMatrix() {
+        MatrixUtils.reverseMatrix(this);
+    }
+
     public AbstractVector getVector(int number) {
         return vectors[number];
     }
 
+    public float getElement(int y, int x) {
+        return vectors[x].get(y);
+    }
+
     public void setVector(AbstractVector vector, int number) {
         vectors[number] = vector;
+    }
+
+    public void setElement(float number, int y, int x) {
+        vectors[x].set(number, y);
     }
 
     public int getLength() {
@@ -52,15 +64,15 @@ public abstract class AbstractMatrix {
         return vectors[vector].getLength();
     }
 
-    public AbstractMatrix getMinor(int x, int y) {
-        return MatrixUtils.getMinor(this, x, y);
+    public AbstractMatrix getMinor(int y, int x) {
+        return MatrixUtils.getMinor(this, y, x);
     }
 
     public float getDeterminant() {
         float determinant = 0;
-        for(int i = 0; i < this.getLength(); i++) {
+        for(int i = 0; i < this.getLength(); i++)
+            // we can use here MatrixUtils.calculateCofactor but this could be a bit faster
             determinant += this.getVector(i).get(0) * this.getMinor(0, i).getDeterminant() * (i % 2 == 0 ? 1 : -1);
-        }
 
         return determinant;
     }
@@ -85,4 +97,3 @@ public abstract class AbstractMatrix {
                 '}';
     }
 }
-

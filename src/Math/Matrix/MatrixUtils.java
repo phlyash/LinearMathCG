@@ -72,7 +72,7 @@ public class MatrixUtils {
         AbstractVector vectorToReturn = VectorFactory.createClearVectorWithSameDimension(vector);
 
         for(int i = 0; i < matrix.getLength(); i++)
-            for(int j = 0; j < matrix.getLength(); j++)
+            for(int j = 0; j < matrix.getVectorLength(i); j++)
                 vectorToReturn.set(vectorToReturn.get(i) + vector.get(j) * matrix.getVector(j).get(i), i);
         return vectorToReturn;
     }
@@ -93,7 +93,7 @@ public class MatrixUtils {
             for(int j = 0; j < newMatrix.getVectorLength(i); j++) matrix1.getVector(i).set(newMatrix.getVector(i).get(j), j);
     }
 
-    public static AbstractMatrix getMinor(AbstractMatrix matrix, int x, int y) {
+    public static AbstractMatrix getMinor(AbstractMatrix matrix, int y, int x) {
         AbstractMatrix minorMatrix;
 
         try {
@@ -113,11 +113,22 @@ public class MatrixUtils {
                     yPassed = 1;
                     continue;
                 }
-                minorMatrix.getVector(i - xPassed).set(matrix.getVector(j).get(i), j - yPassed);
+                minorMatrix.getVector(i - xPassed).set(matrix.getVector(i).get(j), j - yPassed);
             }
         }
 
         return minorMatrix;
+    }
+
+    public static void reverseMatrix(AbstractMatrix matrix) {
+        AbstractMatrix reversedMatrix = MatrixFactory.createReversedMatrix(matrix);
+
+        for(int i = 0; i < matrix.getLength(); i++)
+            for(int j = 0; j < matrix.getVectorLength(i); j++) matrix.setElement(reversedMatrix.getElement(i, j), j, i);
+    }
+
+    public static float calculateCofactor(AbstractMatrix matrix, int y, int x) {
+        return matrix.getMinor(y, x).getDeterminant() * ((x + y) % 2 == 0 ? 1 : -1);
     }
 
     private static void checkMatrixCompatibility(AbstractMatrix matrix1, AbstractMatrix matrix2) {

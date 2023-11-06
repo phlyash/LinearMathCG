@@ -3,15 +3,17 @@ package Math.Matrix;
 import Math.Exceptions.MatrixExceptions.WrongDimensionMatrixException;
 import Math.Exceptions.WrongAmountOfAxesGivenException;
 import Math.Matrix.Matrixes.AbstractMatrix;
+import Math.Matrix.Matrixes.Matrix2D;
 import Math.Matrix.Matrixes.Matrix3D;
 import Math.Matrix.Matrixes.Matrix4D;
 import Math.ReflectionUtils;
 
-import java.lang.reflect.Constructor;
-
 public class MatrixFactory {
     public static AbstractMatrix createZeroMatrix(int dimensions) {
         switch (dimensions) {
+            case 2 -> {
+                return new Matrix2D();
+            }
             case 3 -> {
                 return new Matrix3D();
             }
@@ -25,9 +27,8 @@ public class MatrixFactory {
     public static AbstractMatrix createIdentityMatrix(int dimensions) {
         AbstractMatrix matrix = createZeroMatrix(dimensions);
 
-        for(int i = 0; i < matrix.getLength(); i++) {
+        for(int i = 0; i < matrix.getLength(); i++)
             matrix.getVector(i).set(1, i);
-        }
 
         return matrix;
     }
@@ -69,5 +70,21 @@ public class MatrixFactory {
 
     public static AbstractMatrix createTransposedMatrix(AbstractMatrix matrix) {
         return ReflectionUtils.getResultOfFunction(matrix, MatrixUtils::transpose);
+    }
+
+    public static AbstractMatrix createReversedMatrix(AbstractMatrix matrix) {
+        AbstractMatrix cofactorsMatrix = MatrixFactory.createZeroMatrix(matrix.getLength());
+
+        float determinant = matrix.getDeterminant();
+        if (Math.abs(determinant) < 1e-6) throw new RuntimeException("Given matrix doesn't have reversed matrix");
+
+        for(int i = 0; i < matrix.getLength(); i++)
+            for(int j = 0; j < matrix.getVectorLength(i); j++)
+                cofactorsMatrix.setElement(MatrixUtils.calculateCofactor(matrix, j, i), j, i);
+
+        // we don`t need to transpose matrix `cause we found already transposed matrix
+        cofactorsMatrix.divide(determinant);
+
+        return cofactorsMatrix;
     }
 }

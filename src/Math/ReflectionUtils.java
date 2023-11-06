@@ -39,6 +39,7 @@ public final class ReflectionUtils {
     public interface BiFunction<V, E> {
         void apply(V object1, E object2);
     }
+
     @FunctionalInterface
     public interface Function<V> {
         void apply(V object);
