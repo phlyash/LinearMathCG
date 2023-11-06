@@ -3,6 +3,7 @@ package Math.Matrix.Matrixes;
 import Math.Matrix.MatrixFactory;
 import Math.Vector.VectorFactory;
 import Math.Vector.Vectors.AbstractVector;
+import Math.Vector.Vectors.Vector2D;
 import Math.Vector.Vectors.Vector3D;
 import Math.Vector.Vectors.Vector4D;
 import org.junit.jupiter.api.Assertions;
@@ -171,6 +172,20 @@ public class MatrixTest {
 
             Assertions.assertTrue(Math.abs(determinant - exceptedDeterminant) < 1e-6);
         }
+    }
+
+    @Test
+    @DisplayName("Reverse 2D matrix test")
+    void testReversingMatrix2D() {
+        Matrix2D matrix = new Matrix2D(new Vector2D(1, 2), new Vector2D(3, 4));
+        Matrix2D matrixToReverse = new Matrix2D(new Vector2D(1, 2), new Vector2D(3, 4));
+        matrixToReverse.reverseMatrix();
+        matrix.multiplyOnMatrix(matrixToReverse);
+
+        AbstractMatrix identityMatrix = MatrixFactory.createIdentityMatrix(2);
+        for(int i = 0; i < matrix.getLength(); i++)
+            for (int j = 0; j < matrix.getVectorLength(i); j++)
+                Assertions.assertTrue(Math.abs(matrix.getElement(i, j) - identityMatrix.getElement(i, j)) < 1e-6);
     }
 
     @Test

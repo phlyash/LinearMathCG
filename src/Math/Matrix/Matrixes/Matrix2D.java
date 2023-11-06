@@ -30,4 +30,24 @@ public final class Matrix2D extends AbstractMatrix {
         return this.getVector(0).get(0) * this.getVector(1).get(1) -
                 this.getVector(1).get(0) * this.getVector(0).get(1);
     }
+
+    @Override
+    public void reverseMatrix() {
+        float determinant = getDeterminant();
+        if (Math.abs(determinant) < 1e-6) throw new RuntimeException("This matrix doesnt have reversed matrix");
+
+        this.setElement(-this.getElement(0, 1), 0, 1);
+        this.setElement(-this.getElement(1, 0), 1, 0);
+
+        this.setElement(getElement(1, 1) + getElement(0, 0), 1, 1);
+        this.setElement(getElement(1, 1) - getElement(0, 0), 0, 0);
+        this.setElement(getElement(1, 1) - getElement(0, 0), 1, 1);
+
+        this.divide(determinant);
+    }
+
+    @Override
+    public AbstractMatrix getMinor(int y, int x) {
+        throw new RuntimeException("Minors for 2D matrixes are not supported");
+    }
 }

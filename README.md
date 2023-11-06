@@ -49,15 +49,14 @@ Each matrix implements following methods:
 * `setVector(AbstractVector vector, int number)` sets vector to given index;
 * `getLength()` returns length of vectors array;
 * `getVectorLength(int vector)` returns length of vector at `vector` position;
-* `getMinor(int x, int y)` return minor of current instance without `x` and `y` axes;
+* `getMinor(int y, int x)` return minor of current instance without `x` and `y` axes;
 * `getDeterminant()` returns determinant of current instance.
 * `reverseMatrix()` converts current matrix to it reversed matrix
 * `getElement(int y, int x)` shortcut to `getVector(x).get(y)`
 * `setElement(float number, int y, int x)` shortcut to `getVector(x).set(number, y)`
 
 It's important to say that on current moment `Matrix2D` doesn't support operations
-with minors and all function that uses `getMinor(int x, int y)` function full list of that functions:
-* `reverseMatrix()`
+with `getMinor(int y, int x)` because there is no classes for 1 dimensional matrixes.
 
 ### Utils and Factory classes
 
