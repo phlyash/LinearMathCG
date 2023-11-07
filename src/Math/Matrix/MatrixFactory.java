@@ -1,5 +1,6 @@
 package Math.Matrix;
 
+import Math.Exceptions.MatrixExceptions.ReversingMatrixException;
 import Math.Exceptions.MatrixExceptions.WrongDimensionMatrixException;
 import Math.Exceptions.WrongAmountOfAxesGivenException;
 import Math.Matrix.Matrixes.AbstractMatrix;
@@ -76,7 +77,7 @@ public class MatrixFactory {
         AbstractMatrix cofactorsMatrix = MatrixFactory.createZeroMatrix(matrix.getLength());
 
         float determinant = matrix.getDeterminant();
-        if (Math.abs(determinant) < 1e-6) throw new RuntimeException("Given matrix doesn't have reversed matrix");
+        if (Math.abs(determinant) < 1e-6) throw new ReversingMatrixException();
 
         for(int i = 0; i < matrix.getLength(); i++)
             for(int j = 0; j < matrix.getVectorLength(i); j++)

@@ -1,5 +1,6 @@
 package Math.Matrix.Matrixes;
 
+import Math.Exceptions.MatrixExceptions.ReversingMatrixException;
 import Math.Exceptions.MatrixExceptions.WrongDimensionMatrixException;
 import Math.Exceptions.WrongAmountOfArgumentsException;
 import Math.Exceptions.WrongAmountOfAxesGivenException;
@@ -43,7 +44,7 @@ public final class Matrix2D extends AbstractMatrix {
     @Override
     public void reverseMatrix() {
         float determinant = getDeterminant();
-        if (Math.abs(determinant) < 1e-6) throw new RuntimeException("This matrix doesnt have reversed matrix");
+        if (Math.abs(determinant) < 1e-6) throw new ReversingMatrixException();
 
         this.setElement(-this.getElement(0, 1), 0, 1);
         this.setElement(-this.getElement(1, 0), 1, 0);

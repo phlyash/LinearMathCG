@@ -9,25 +9,16 @@ import Math.Matrix.Matrixes.Matrix4D;
 import Math.Vector.VectorFactory;
 import Math.Vector.VectorUtils;
 import Math.Vector.Vectors.AbstractVector;
-import Math.Vector.Vectors.Vector2D;
-import Math.Vector.Vectors.Vector3D;
-
-import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
 public class MatrixUtils {
     public static final HashMap<Class<? extends AbstractMatrix>, Constructor<?>> demotionMatrix = new HashMap<>();
-    public static final HashMap<Class<? extends AbstractMatrix>, Class<? extends AbstractVector>> demotedVectorForMatrix = new HashMap<>();
-
     static {
         try {
-            demotionMatrix.put(Matrix3D.class, Matrix2D.class.getDeclaredConstructor(Array.newInstance(Vector2D.class, 0).getClass()));
-            demotionMatrix.put(Matrix4D.class, Matrix3D.class.getDeclaredConstructor(Array.newInstance(Vector3D.class, 0).getClass()));
-
-            demotedVectorForMatrix.put(Matrix3D.class, Vector2D.class);
-            demotedVectorForMatrix.put(Matrix4D.class, Vector3D.class);
+            demotionMatrix.put(Matrix3D.class, Matrix2D.class.getDeclaredConstructor());
+            demotionMatrix.put(Matrix4D.class, Matrix3D.class.getDeclaredConstructor());
         } catch (NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
@@ -97,8 +88,7 @@ public class MatrixUtils {
         AbstractMatrix minorMatrix;
 
         try {
-            minorMatrix = (AbstractMatrix) MatrixUtils.demotionMatrix.get(matrix.getClass())
-                    .newInstance(Array.newInstance(demotedVectorForMatrix.get(matrix.getClass()), 0));
+            minorMatrix = (AbstractMatrix) MatrixUtils.demotionMatrix.get(matrix.getClass()).newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
