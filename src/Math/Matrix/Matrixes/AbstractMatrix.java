@@ -5,6 +5,7 @@ import Math.Vector.Vectors.AbstractVector;
 
 import java.util.Arrays;
 
+//TODO special exception for reversing matrix and constructor for matrixes with floats
 public abstract class AbstractMatrix {
     protected AbstractVector[] vectors;
 

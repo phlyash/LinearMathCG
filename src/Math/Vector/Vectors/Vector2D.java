@@ -4,7 +4,7 @@ import Math.Exceptions.WrongAmountOfAxesGivenException;
 import Math.Exceptions.VectorExceptions.WrongDimensionVectorException;
 
 public final class Vector2D extends AbstractVector {
-    public Vector2D(float ... axes) {
+    public Vector2D(float... axes) {
         vector = new float[2];
         switch (axes.length) {
             case 0 -> {} // Java initialized vector with zeros by default

@@ -168,7 +168,7 @@ public class MatrixTest {
     void testDeterminant() {
         for(AbstractMatrix matrix: matrixes) {
             float determinant = matrix.getDeterminant();
-            float exceptedDeterminant = matrix instanceof Matrix2D ? -4 : 0;    //todo
+            float exceptedDeterminant = matrix instanceof Matrix2D ? -4 : 0;
 
             Assertions.assertTrue(Math.abs(determinant - exceptedDeterminant) < 1e-6);
         }

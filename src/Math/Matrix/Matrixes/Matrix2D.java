@@ -1,20 +1,29 @@
 package Math.Matrix.Matrixes;
 
 import Math.Exceptions.MatrixExceptions.WrongDimensionMatrixException;
+import Math.Exceptions.WrongAmountOfArgumentsException;
 import Math.Exceptions.WrongAmountOfAxesGivenException;
 import Math.Vector.Vectors.Vector2D;
 
 public final class Matrix2D extends AbstractMatrix {
-    public Matrix2D(Vector2D ... vectors) {
-        this.vectors = new Vector2D[2];
+    public Matrix2D(Vector2D... vectors) {
+        if (vectors.length != 2) throw new WrongAmountOfAxesGivenException();
 
-        switch (vectors.length) {
-            case 0 -> {
-                for(int i = 0; i < 2; i++) this.vectors[i] = new Vector2D();
-            }
-            case 2 -> System.arraycopy(vectors, 0, this.vectors, 0, 2);
-            default -> throw new WrongAmountOfAxesGivenException();
-        }
+        this.vectors = new Vector2D[2];
+        System.arraycopy(vectors, 0, this.vectors, 0, 2);
+    }
+
+    public Matrix2D(float... numbers) {
+        if (numbers.length != 4) throw new WrongAmountOfArgumentsException();
+
+        this.vectors = new Vector2D[2];
+        for(int i = 0; i < 2; i++)
+            this.vectors[i] = new Vector2D(numbers[i * 2], numbers[i * 2 + 1]);
+    }
+
+    public Matrix2D() {
+        this.vectors = new Vector2D[2];
+        for(int i = 0; i < 2; i++) this.vectors[i] = new Vector2D();
     }
 
     public Matrix2D(AbstractMatrix matrix) {

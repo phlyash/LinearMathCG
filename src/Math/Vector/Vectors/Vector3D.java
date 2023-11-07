@@ -5,7 +5,7 @@ import Math.Exceptions.VectorExceptions.WrongDimensionVectorException;
 import Math.Vector.VectorUtils;
 
 public final class Vector3D extends AbstractVector {
-    public Vector3D(float ... axes) {
+    public Vector3D(float... axes) {
         vector = new float[3];
         switch (axes.length) {
             case 0 -> {} // Java initialized vector with zeros by default
