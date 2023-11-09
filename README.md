@@ -50,10 +50,10 @@ Each matrix implements following methods:
 * `getLength()` returns length of vectors array;
 * `getVectorLength(int vector)` returns length of vector at `vector` position;
 * `getMinor(int y, int x)` return minor of current instance without `x` and `y` axes;
-* `getDeterminant()` returns determinant of current instance.
-* `reverseMatrix()` converts current matrix to it reversed matrix
-* `getElement(int y, int x)` shortcut to `getVector(x).get(y)`
-* `setElement(float number, int y, int x)` shortcut to `getVector(x).set(number, y)`
+* `getDeterminant()` returns determinant of current instance;
+* `reverseMatrix()` converts current matrix to it reversed matrix;
+* `getElement(int y, int x)` shortcut to `getVector(x).get(y)`;
+* `setElement(float number, int y, int x)` shortcut to `getVector(x).set(number, y)`;
 
 It's important to say that on current moment `Matrix2D` doesn't support operations
 with `getMinor(int y, int x)` because there is no classes for 1 dimensional matrixes.
@@ -76,4 +76,5 @@ invoked with given data.
 * `WrongDimensionMatrixException` thrown when matrixes are not compatible;
 * `WrongDimensionVectorException` thrown when vectors are not compatible;
 * `WrongAmountOfAxesGivenException` thrown if current version of library not supports such dimensions of objects;
-
+* `WrongAmountOfArgumentsGivenException` basically same as `WrongAmountOfAxesGivenException` but throwed from constructor of matrix with float collection;
+* `ReversingMatrixException` throws from `reverse()` funtions if matrix doesn't have reversed matrix (determinant = 0).
